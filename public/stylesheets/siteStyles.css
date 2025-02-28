@@ -1,0 +1,29 @@
+body {
+  font: 54px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+#topBanner{
+  height: 150px;
+}
+
+/* Left div under top banner*/
+#leftContent{
+  background-color: #002654;
+  width: 15%;
+}
+
+/* Center div under top banner - This is where main content is placed*/
+#mainContent{
+  height: 100%;
+  width: 70%;
+}
+
+/* Right div under top banner*/
+#rightContent{
+  width: 15%;
+}
+
+a {
+  color: #00B7FF;
+}
