@@ -1,4 +1,4 @@
-const pool = require('./database');
+const pool = require('./dbConnection');
 
 const getAddress = (req, res) => {
     // console.log(req.body.name);
