@@ -27,3 +27,15 @@ body {
 a {
   color: #00B7FF;
 }
+
+#abvTblTxt{
+  margin-top: 5%;
+  margin-left: 2%;
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+#addressList_wrapper{
+  margin: 1% 2% 2%
+
+}

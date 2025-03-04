@@ -15,24 +15,63 @@ async function getAddress(searchTerm){
         }
     }).then(res => res.json())
         .then((response) => {
-
             if (response.length > 0){
+
                 console.log("success")
-                $('#addressList').empty();
+                console.log(response[0])
 
-                for (let i = 0; i < response.length; i++){
-                    console.log(response[i])
-                    $('#addressList').append('<li id="address'+i+'" style="list-style-type: none;"> </li>');
-                    document.getElementById('address'+i).innerText = response[i].houseno + ', '
-                        + response[i].address + ', ' + response[i].city + ', ' + response[i].county + ', '
-                        + response[i].postcode;
+                // set table title
+                document.getElementById('abvTblTxt').innerText = 'Search Results';
 
+
+                // if the addressList element doesnt exist, create it (the ele holding the table)
+                if(!document.getElementById('addressList')){
+                    console.log("addresslist doesnt exists");
+                    $('#mainContent').append('<table id="addressList"> </table>');
                 }
+
+                // If the datatable already exists, destroy it
+                if($.fn.DataTable.isDataTable('#addressList')){
+                    console.log("is DataTable")
+                    let table = $('#addressList').DataTable();
+                    table.destroy();
+                }
+
+                // Create array of data for the table
+                let tableData =[];
+                for (let i =0; i< response.length; i++){
+                    tableData.push({House_number: response[i].houseno, Address: response[i].address,
+                        City: response[i].city, County: response[i].county, Postcode: response[i].postcode});
+                }
+
+                console.log("table data")
+                console.log(tableData)
+
+                // Create the Datatable containing data from the array above
+                let addressTable = $('#addressList').DataTable({
+                    data:tableData,
+                    columns: [
+                        {data: 'House_number', title: 'House Number'},
+                        {data: 'Address', title: 'Address'},
+                        {data: 'City', title: 'City'},
+                        {data: 'County', title: 'County'},
+                        {data: 'Postcode', title: 'Postcode'}
+                    ]
+                });
+
+
             }  else{
-                console.log("fail")
-                $('#addressList').empty();
-                $('#addressList').append('<li id="notFound" style="list-style-type: none;"></li>');
-                document.getElementById('notFound').innerText = 'No Results Found';
+                // If table exists, destroy it and the element it sits in
+                if($.fn.DataTable.isDataTable('#addressList')){
+                    console.log("is DataTable")
+                    let table = $('#addressList').DataTable();
+                    table.clear();
+                    table.destroy();
+                    $('#addressList').remove();
+                    document.getElementById('abvTblTxt').innerText = 'No Results Found';
+                } else {
+                    document.getElementById('abvTblTxt').innerText = 'No Results Found';
+                }
             }
         })
 }
