@@ -10,19 +10,6 @@ async function getAddress(searchTerm){
     let typeObj = {name:term};
 
     let json = JSON.stringify(typeObj);
-    // console.log(json)
-
-    let bannedWord = false;
-    const operators = ['CREATE', 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'ALL', 'AND', 'ANY', 'BETWEEN',
-        'EXISTS','IN','LIKE', 'NOT', 'OR', 'SOME', '--']
-
-    for (let i = 0; i < operators.length; i++) {
-        if (term.includes(operators[i])) {
-            bannedWord = true;
-        }
-    }
-
-    if (bannedWord === false){
 
         console.log("in")
 
@@ -95,8 +82,4 @@ async function getAddress(searchTerm){
                     }
                 }
             })
-    } else {
-        console.log("try again")
-        document.getElementById('abvTblTxt').innerText = 'Please try another postcode';
-    }
 }
